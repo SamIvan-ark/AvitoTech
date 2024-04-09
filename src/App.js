@@ -2,7 +2,7 @@ import {
   Route, BrowserRouter as Router, Routes,
 } from 'react-router-dom';
 
-import TOKEN from './TOKEN';
+import SearchPage from './pages/SearchPage';
 
 const App = () => (
   <div className="App">
@@ -20,6 +20,7 @@ const App = () => (
           <Route
             element={(
               <div>
+                <SearchPage />
                 <a href="/page2">
                   туда
                 </a>
