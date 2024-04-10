@@ -1,8 +1,10 @@
+TOKEN=$(shell cat .env | grep TOKEN= | cut -d '=' -f2)
+
 install:
 	npm ci
 
 start:
-	npm start
+	TOKEN=$(TOKEN) npm start
 
 build:
 	npm run build
