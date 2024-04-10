@@ -6,31 +6,29 @@ import SearchPage from './pages/SearchPage';
 
 const App = () => (
   <div className="App">
-    <header className="App-header">
-      <Router>
-        <Routes>
-          <Route
-            element={(
-              <div>
-                <h1>Hello World</h1>
-              </div>
+    <Router>
+      <Routes>
+        <Route
+          element={(
+            <div>
+              <h1>Hello World</h1>
+            </div>
             )}
-            path="/page2"
-          />
-          <Route
-            element={(
-              <div>
-                <SearchPage />
-                <a href="/page2">
-                  туда
-                </a>
-              </div>
+          path="/page2"
+        />
+        <Route
+          element={(
+            <div>
+              <SearchPage />
+              <a href="/page2">
+                туда
+              </a>
+            </div>
             )}
-            path="/"
-          />
-        </Routes>
-      </Router>
-    </header>
+          path="/"
+        />
+      </Routes>
+    </Router>
   </div>
 );
 
