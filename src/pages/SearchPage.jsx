@@ -37,9 +37,9 @@ const SearchPage = () => {
   }
 
   return !data || isLoading
-    ? (<div className="h-100"><CenteredSpinner /></div>)
+    ? (<div className="bg-dark h-100"><CenteredSpinner /></div>)
     : (
-      <div className="flex-column h-100 d-flex">
+      <div className="bg-dark flex-column h-100 d-flex">
         <SearchBar searchHandler={handleSearchParametersChange} />
         <MovieList movies={data.docs} />
         <button onClick={() => handleSearchParametersChange({ page: page <= 1 ? 1 : +page - 1 })} type="button">а раньше что</button>

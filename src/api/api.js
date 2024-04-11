@@ -10,7 +10,7 @@ const defaultParams = {
   },
 };
 
-export const getMoviesList = async (route, params) => {
+export const getMoviesList = async (route, params = {}) => {
   const response = await axios.get([baseUrl, route].join('/'), { ...defaultParams, params });
   return response.data;
 };
