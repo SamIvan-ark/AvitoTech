@@ -1,5 +1,4 @@
 import {
-  Link,
   Route, RouterProvider, createBrowserRouter, createRoutesFromElements,
 } from 'react-router-dom';
 
@@ -16,14 +15,9 @@ const router = createBrowserRouter(
     />,
     <Route
       element={(
-        <>
-          <SearchPage />
-          <Link to="page2">
-            туда
-          </Link>
-        </>
+        <SearchPage />
       )}
-      errorElement={<h1>А ой (страницу ошибки забыли)</h1>}
+      errorElement={<h1 className="text-light">А ой (страницу ошибки забыли)</h1>}
       path="/"
     />,
   ]),
