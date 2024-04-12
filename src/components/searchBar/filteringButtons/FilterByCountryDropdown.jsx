@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dropdown, FormControl, InputGroup,
 } from 'react-bootstrap';
 
-const FilterByCountryDropdown = ({ options: list, searchHandler }) => {
-  const options = list.map((country) => country.name);
+import { getAcceptableValuesRange } from '../../../api/api';
+import useApi from '../../../hooks/useApi';
+import CenteredSpinner from '../../CenteredSpinner';
+
+const FilterByCountryDropdown = ({ searchHandler }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredOptions = options
-    .filter((countryName) => countryName.toLowerCase().includes(searchTerm.toLowerCase()));
+  const { data, isLoading, fetchData } = useApi(getAcceptableValuesRange);
+  const searchParams = { field: 'countries.name' };
+
+  useEffect(() => {
+    fetchData('movie/possible-values-by-field', searchParams);
+  }, []);
 
   return (
     <Dropdown>
@@ -25,14 +32,19 @@ const FilterByCountryDropdown = ({ options: list, searchHandler }) => {
             value={searchTerm}
           />
         </InputGroup>
-        {filteredOptions.map((countryName) => (
-          <Dropdown.Item
-            key={countryName}
-            onClick={() => searchHandler({ 'countries.name': countryName })}
-          >
-            {countryName}
-          </Dropdown.Item>
-        ))}
+        { isLoading || !data
+          ? <CenteredSpinner />
+          : data
+            .map((country) => country.name)
+            .filter((countryName) => countryName.toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((countryName) => (
+              <Dropdown.Item
+                key={countryName}
+                onClick={() => searchHandler({ 'countries.name': countryName })}
+              >
+                {countryName}
+              </Dropdown.Item>
+            ))}
       </Dropdown.Menu>
     </Dropdown>
   );

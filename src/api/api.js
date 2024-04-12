@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://api.kinopoisk.dev/v1.4';
+const baseUrl = 'https://api.kinopoisk.dev';
 
 const defaultParams = {
   method: 'get',
@@ -11,6 +11,11 @@ const defaultParams = {
 };
 
 export const getMoviesList = async (route, params = {}) => {
-  const response = await axios.get([baseUrl, route].join('/'), { ...defaultParams, params });
+  const response = await axios.get([baseUrl, 'v1.4', route].join('/'), { ...defaultParams, params });
+  return response.data;
+};
+
+export const getAcceptableValuesRange = async (route, params) => {
+  const response = await axios.get([baseUrl, 'v1', route].join('/'), { ...defaultParams, params });
   return response.data;
 };
