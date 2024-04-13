@@ -3,7 +3,7 @@ import {
 } from 'react-router-dom';
 
 import { getMoviesList } from './api/api';
-import MoviePage from './components/MoviePage';
+import MoviePage from './pages/MoviePage';
 import SearchPage from './pages/SearchPage';
 
 const router = createBrowserRouter(

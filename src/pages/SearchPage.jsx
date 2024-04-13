@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getMoviesByName, getMoviesList } from '../api/api';
 import CenteredSpinner from '../components/CenteredSpinner';
 import MoviesList from '../components/MoviesList';
-import { SearchBar } from '../components/searchBar';
+import { SearchBar } from '../components/SearchBar';
 import useApi from '../hooks/useApi';
 import { appendQueryParams } from '../utils/updateSearchParams';
 
