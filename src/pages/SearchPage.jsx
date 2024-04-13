@@ -2,48 +2,58 @@ import qs from 'qs';
 import { useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getMoviesList } from '../api/api';
+import { getMoviesByName, getMoviesList } from '../api/api';
 import CenteredSpinner from '../components/CenteredSpinner';
-import MovieList from '../components/MovieList';
+import MoviesList from '../components/MoviesList';
 import { SearchBar } from '../components/searchBar';
 import useApi from '../hooks/useApi';
-import updateQueryParams from '../utils/updateSearchParams';
+import { appendQueryParams } from '../utils/updateSearchParams';
 
 const SearchPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const {
-    data, error, isLoading, fetchData,
+    data: listOfMovies,
+    error: listOfMoviesError,
+    isLoading: isListOfMoviesLoading,
+    fetchData: fetchListOfMovies,
   } = useApi(getMoviesList);
+  const {
+    data: movieByName,
+  } = useApi(getMoviesByName);
 
   const searchParams = useMemo(() => qs.parse(location.search.replace('?', '')), [location]);
   const { page = 1 } = searchParams;
 
   const handleSearchParametersChange = (newParams) => navigate({
-    search: updateQueryParams(searchParams, newParams),
+    search: appendQueryParams(searchParams, newParams),
   });
 
   useEffect(() => {
-    fetchData('movie', searchParams);
+    if (searchParams.query) {
+      fetchListOfMovies('movie/search', searchParams);
+    } else {
+      fetchListOfMovies('movie', searchParams);
+    }
   }, [searchParams]);
 
-  if (error) {
+  if (listOfMoviesError) {
     return (
       <p>
         Error:
-        {error.message}
+        {listOfMoviesError.message}
       </p>
     );
   }
 
-  return !data || isLoading
+  return !listOfMovies || isListOfMoviesLoading
     ? (<div className="bg-dark h-100"><CenteredSpinner /></div>)
     : (
       <div className="bg-dark flex-column h-100 d-flex">
         <SearchBar searchHandler={handleSearchParametersChange} />
-        <MovieList movies={data.docs} />
+        <MoviesList movies={movieByName ? movieByName.docs : listOfMovies.docs} />
         <button onClick={() => handleSearchParametersChange({ page: page <= 1 ? 1 : +page - 1 })} type="button">а раньше что</button>
-        <button onClick={() => handleSearchParametersChange({ page: page >= data.pages ? page : +page + 1 })} type="button">а дальше что</button>
+        <button onClick={() => handleSearchParametersChange({ page: page >= listOfMovies.pages ? page : +page + 1 })} type="button">а дальше что</button>
       </div>
     );
 };

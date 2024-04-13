@@ -15,6 +15,11 @@ export const getMoviesList = async (route, params = {}) => {
   return response.data;
 };
 
+export const getMoviesByName = async (route, params = {}) => {
+  const response = await axios.get([baseUrl, 'v1.4', 'movie', route].join('/'), { ...defaultParams, params });
+  return response.data;
+};
+
 export const getAcceptableValuesRange = async (route, params) => {
   const response = await axios.get([baseUrl, 'v1', route].join('/'), { ...defaultParams, params });
   return response.data;

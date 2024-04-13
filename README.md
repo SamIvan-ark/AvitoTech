@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+## Установка и разворачивание проекта
+1. Клонировать репозиторий к себе локально
+2. Установить зависимости: `npm i` или `make install`
+3. Запустить проект с помощью команды `TOKEN=<your api token> npm run start`. Токен можно получить в ТГ-боте Кинопоиска: [@kinopoiskdev_bot](https://t.me/kinopoiskdev_bot)
+4. Проект будет доступен по адресу [localhost:7070](http://localhost:7070/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Альтернативный способ запуска
+3.
+    1. Создать в корне проекта файл `.env`. 
+    2. В `.env` прописать единственную строку с токеном:
+`TOKEN=<Сам токен>`.
+    3. Запускать проект с помощью команды `make start` — токен возьмётся из файла `.env` автоматически
 
-## Available Scripts
+## Описание проблем при разработке проекта
 
-In the project directory, you can run:
+#### 1. Настроить конфигурацию приложения так, чтобы оно запускалось с помощью команды `TOKEN=<your api token> npm run start`
+##### А в чем, собственно, сложность?
+Для повышения скорости разработки я использовал пакет Create-react-app. В итоге приложение просто игнорирует все переменные окружения,
+которые не начинаются с префикса `REACT_APP_`, а такое поведение никак не помогает в решении задачи.
+##### Как решал?
+Пришлось сделать `eject` проекта, после чего все конфиги стали доступны. Нужную переменную окружения удалось "зашить" в файле `config/.env`, поэтому она стала доступна в приложении. Как альтернативу сделал команду в мейкфайле, чтобы можно было один раз установить токен в локальный файл `.env` и не прописывать его при каждом запуске.
 
-### `npm start`
+#### 2. Как отобразить результаты запросов на разные эндпоинты для общего поиска по фильмам и для поиска фильмов по названию
+##### А в чем, собственно, сложность?
+Разные эндпоинты у компонентов разных уровней вложенности, но результаты при этом должны отдавать на один и тот же уровень. Получается, что в какой-то момент результаты запроса вложенного компонента должны перебить результаты запроса его родителя. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Чуть подробнее: изначально поиск происходит по универсальному фильтру эндпоинта `.../movie` у контейнера с бизнес-логикой `SearchPage`. Результаты достаточно просто передаются в дочерний в компонент `SearchPage => MoviesPage`. А вот поиск по названию фильма идет уже по эндпоинту `.../movie/search` — эта ручка относится компоненту, который находится внутри `SearchPage`: `SearchPage => SearchForm => SearchBar`. Соответственно, результат запроса нужно поднять снова до `SearchPage` (`SearchPage <= SearchForm <= SearchBar`) и передать в `MoviesPage` (`SearchPage => MoviesPage`).
+##### Как решал?
+Красивым решением будет использование стейт-менеджера, но данный проект я решил делать без него, так как стейт-менеджеры не были указаны в стеке технологий.
+Я оставил логику выбора нужного на данный момент эндпоинта на уровне `SearchPage`, а вот вложенный `SearchBar` поднимает наверх только `queryString` запроса. Получается, что компонент `SearchPage` сам решает, по какому эндпоинту он будет делать запрос. Решение происходит на основании свойства в `queryString`. 
+##### Почему решение не очень красивое?
+Такое решение жестко связаывает нас с используемым api. При смене api придется править сами компоненты.

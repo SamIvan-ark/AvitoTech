@@ -1,8 +1,8 @@
 import qs from 'qs';
 
-const updateQueryParams = (params, newParams) => {
+export const appendQueryParams = (params, newParams) => {
   const query = qs.parse(params);
   return qs.stringify({ ...query, ...newParams });
 };
 
-export default updateQueryParams;
+export const replaceQueryParams = (newParams) => qs.stringify({ ...newParams });

@@ -1,7 +1,7 @@
 import { Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const MovieList = ({ movies }) => (
+const MoviesList = ({ movies }) => (
   <Row className="m-3 justify-content-center">
     {movies.map((movie) => (
       <Col key={movie.id} lg={4} md={5} sm={6} xl={2} xs={12}>
@@ -17,4 +17,4 @@ const MovieList = ({ movies }) => (
   </Row>
 );
 
-export default MovieList;
+export default MoviesList;
