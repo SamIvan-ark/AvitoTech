@@ -5,6 +5,8 @@ import {
 } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
+import { ActorsList, SeasonsAndSeries } from '../components/movieDataComponents';
+
 const MoviePage = () => {
   const filmData = useLoaderData();
   const navigate = useNavigate();
@@ -22,25 +24,10 @@ const MoviePage = () => {
           <h3>
             {`Рейтинг: ${filmData.rating.imdb}`}
           </h3>
-          <h3>Актёры:</h3>
-          <div className="border d-flex flex-wrap">
-            {filteredStaff.map((actor) => {
-              const name = actor.name ?? actor.enName;
-              return (
-                <div className="card mb-3" key={actor.id} style={{ minWidth: '250px', maxWidth: '400px' }}>
-                  <div className="row g-0">
-                    <div className="col-md-6">
-                      <img alt={`Фотография актера ${name}`} className="img-fluid rounded-start" src={actor.photo} />
+          <div>
                     </div>
-                    <div className="dark col-md-6">
-                      <div className="card-body">
-                        <p className="card-title fs-3">{name}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div>
+            <SeasonsAndSeries id={filmData.id} />
           </div>
           {/* <Carousel className="w-25">
             {filmData.persons.map((actor) => (
@@ -57,7 +44,6 @@ const MoviePage = () => {
               </Carousel.Item>
             ))}
           </Carousel> */}
-          <h3>Сезоны и серии:</h3>
           {/* Разместите информацию о сезонах и сериях с использованием пагинации */}
           {/* Разместите отзывы пользователей с использованием пагинации */}
           {/* Разместите постеры с использованием карусели */}

@@ -24,3 +24,8 @@ export const getAcceptableValuesRange = async (route, params) => {
   const response = await axios.get([baseUrl, 'v1', route].join('/'), { ...defaultParams, params });
   return response.data;
 };
+
+export const getSeasons = async (params) => {
+  const response = await axios.get([baseUrl, 'v1.4', 'season'].join('/'), { ...defaultParams, params });
+  return response.data;
+};
