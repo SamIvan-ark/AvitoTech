@@ -26,7 +26,6 @@ const SeasonsAndSeries = ({ id }) => {
       <h3>Нет информации о сезонах и сериях</h3>
     );
   }
-  console.log(seasons);
   return (
     <>
       <h3>Сезоны и серии:</h3>

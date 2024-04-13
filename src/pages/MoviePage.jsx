@@ -11,9 +11,6 @@ const MoviePage = () => {
   const filmData = useLoaderData();
   const navigate = useNavigate();
 
-  const filteredStaff = filmData.persons
-    .filter(({ profession, enProfession }) => profession === 'актеры' || enProfession === 'actor');
-
   return (
     <Container className="bg-dark text-light p-4" fluid>
       <Button onClick={() => navigate(-1)} variant="secondary">Назад</Button>
@@ -25,7 +22,8 @@ const MoviePage = () => {
             {`Рейтинг: ${filmData.rating.imdb}`}
           </h3>
           <div>
-                    </div>
+            <ActorsList id={filmData.id} />
+          </div>
           <div>
             <SeasonsAndSeries id={filmData.id} />
           </div>

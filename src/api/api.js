@@ -29,3 +29,14 @@ export const getSeasons = async (params) => {
   const response = await axios.get([baseUrl, 'v1.4', 'season'].join('/'), { ...defaultParams, params });
   return response.data;
 };
+
+export const getStaff = async (params) => {
+  const response = await axios.get([baseUrl, 'v1.4', 'person'].join('/'), {
+    ...defaultParams,
+    params,
+    paramsSerializer: {
+      indexes: null,
+    },
+  });
+  return response.data;
+};
