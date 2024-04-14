@@ -15,7 +15,7 @@ const FilteringBar = ({ searchHandler }) => (
       <Nav>
         <Navbar.Toggle aria-controls="page-count-picker" />
         <Navbar.Collapse id="search">
-          <div className="d-flex align-items-center">
+          <div className="d-flex flex-column flex-lg-row align-items-center">
             <FilmsOnPageDropdown searchHandler={searchHandler} />
             <FilterByCountryDropdown searchHandler={searchHandler} />
             <FilterByYearButton searchHandler={searchHandler} />
