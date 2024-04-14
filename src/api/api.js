@@ -45,3 +45,14 @@ export const getReviews = async (params) => {
   const response = await axios.get([baseUrl, 'v1.4', 'review'].join('/'), { ...defaultParams, params });
   return response.data;
 };
+
+export const getPosters = async (params) => {
+  const response = await axios.get([baseUrl, 'v1.4', 'image'].join('/'), {
+    ...defaultParams,
+    params,
+    paramsSerializer: {
+      indexes: null,
+    },
+  });
+  return response.data;
+};

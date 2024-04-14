@@ -1,11 +1,12 @@
 import {
   Button,
-  // Carousel,
   Container,
 } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-import { ActorsList, Reviews, SeasonsAndSeries } from '../components/movieDataComponents';
+import {
+  ActorsList, Posters, Reviews, SeasonsAndSeries,
+} from '../components/movieDataComponents';
 
 const MoviePage = () => {
   const filmData = useLoaderData();
@@ -30,24 +31,9 @@ const MoviePage = () => {
           <div>
             <Reviews id={filmData.id} />
           </div>
-          {/* <Carousel className="w-25">
-            {filmData.persons.map((actor) => (
-              <Carousel.Item key={actor.id}>
-                <img
-                  alt={actor.name}
-                  className="d-block w-100"
-                  src={actor.photo}
-                />
-                <Carousel.Caption>
-                  <h3>{actor.name}</h3>
-                  <p>{actor.description}</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))}
-          </Carousel> */}
-          {/* Разместите информацию о сезонах и сериях с использованием пагинации */}
-          {/* Разместите отзывы пользователей с использованием пагинации */}
-          {/* Разместите постеры с использованием карусели */}
+          <div>
+            <Posters id={filmData.id} />
+          </div>
         </div>
       </div>
     </Container>
