@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import {
-  Button, Dropdown, FormControl, InputGroup,
+  Button, FormControl, InputGroup, NavDropdown,
 } from 'react-bootstrap';
 
 const FilterByYearButton = ({ searchHandler }) => {
   const [year, setYear] = useState('');
 
   return (
-    <Dropdown>
-      <Dropdown.Toggle id="dropdown-basic" variant="secondary">
-        Год
-      </Dropdown.Toggle>
-      <Dropdown.Menu className="dropdown-menu-dark" style={{ maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' }}>
+    <NavDropdown
+      menuVariant="dark"
+      title="Год"
+    >
+
+      <div className="dropdown-menu-dark" style={{ maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden' }}>
         <InputGroup className="mb-3">
           <FormControl
             aria-label="Год"
@@ -24,8 +25,8 @@ const FilterByYearButton = ({ searchHandler }) => {
             Поиск
           </Button>
         </InputGroup>
-      </Dropdown.Menu>
-    </Dropdown>
+      </div>
+    </NavDropdown>
   );
 };
 

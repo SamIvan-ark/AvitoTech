@@ -23,28 +23,24 @@ const SearchForm = () => {
       });
     },
   });
-
   return (
-    <Form className="col-10" onSubmit={formik.handleSubmit}>
-      <Form.Group className="form-floating">
-        <Form.Control
-          autoComplete="movieTitle"
-          id="movieTitle"
-          name="movieTitle"
-          onChange={formik.handleChange}
-          placeholder="Введите название фильма"
-          type="text"
-          value={formik.values.movieTitle}
-        />
-        <Form.Label htmlFor="movieTitle">Введите название фильма</Form.Label>
-        <Button
-          className="w-100"
-          type="submit"
-          variant="outline-secondary"
-        >
-          Найти!
-        </Button>
-      </Form.Group>
+    <Form className="d-flex col-6" onSubmit={formik.handleSubmit}>
+      <Form.Control
+        aria-label="Введите название фильма"
+        autoComplete="movieTitle"
+        id="movieTitle"
+        name="movieTitle"
+        onChange={formik.handleChange}
+        placeholder="Введите название фильма"
+        type="search"
+        value={formik.values.movieTitle}
+      />
+      <Button
+        type="submit"
+        variant="outline-success"
+      >
+        Найти!
+      </Button>
     </Form>
   );
 };

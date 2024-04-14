@@ -1,4 +1,3 @@
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -11,16 +10,21 @@ import {
 } from './filteringButtons';
 
 const FilteringBar = ({ searchHandler }) => (
-  <Navbar bg="dark" className="mb-3" expand="lg" variant="dark">
-    <Container fluid>
+  <Navbar className="mb-3" expand="lg" variant="dark">
+    <div className="d-flex">
       <Nav>
-        <FilmsOnPageDropdown searchHandler={searchHandler} />
-        <FilterByCountryDropdown searchHandler={searchHandler} />
-        <FilterByYearButton searchHandler={searchHandler} />
-        <FilterByAgeRating searchHandler={searchHandler} />
-        <SearchForm />
+        <Navbar.Toggle aria-controls="page-count-picker" />
+        <Navbar.Collapse id="search">
+          <div className="d-flex align-items-center">
+            <FilmsOnPageDropdown searchHandler={searchHandler} />
+            <FilterByCountryDropdown searchHandler={searchHandler} />
+            <FilterByYearButton searchHandler={searchHandler} />
+            <FilterByAgeRating searchHandler={searchHandler} />
+          </div>
+          <SearchForm />
+        </Navbar.Collapse>
       </Nav>
-    </Container>
+    </div>
   </Navbar>
 );
 
