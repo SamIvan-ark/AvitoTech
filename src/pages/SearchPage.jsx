@@ -59,7 +59,7 @@ const SearchPage = () => {
             className={page === '1' ? 'invisible' : ''}
             onClick={() => handleSearchParametersChange({ page: page <= 1 ? 1 : +page - 1 })}
             type="button"
-            variant="primary"
+            variant="outline-light"
           >
             <ArrowLeft />
           </Button>
@@ -69,7 +69,7 @@ const SearchPage = () => {
               page: page >= listOfMovies.pages ? page : +page + 1,
             })}
             type="button"
-            variant="primary"
+            variant="outline-light"
           >
             <ArrowRight />
           </Button>

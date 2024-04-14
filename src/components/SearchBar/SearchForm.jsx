@@ -37,7 +37,7 @@ const SearchForm = () => {
       />
       <Button
         type="submit"
-        variant="outline-success"
+        variant="outline-light"
       >
         Найти!
       </Button>
