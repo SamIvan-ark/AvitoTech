@@ -1,4 +1,4 @@
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Posters = ({ moviesList }) => {
@@ -9,23 +9,31 @@ const Posters = ({ moviesList }) => {
   }
   console.log(moviesList);
   return (
-    <>
-      <h3>Похожие фильмы:</h3>
-      <Carousel className="w-25">
-        {moviesList
-          .map((movie) => (
-            <Carousel.Item key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>
-                <img
-                  alt={movie.name}
-                  className="d-block w-100"
-                  src={movie.poster.url}
-                />
-              </Link>
-            </Carousel.Item>
-          ))}
-      </Carousel>
-    </>
+    <Row>
+      <Col className="text-center">
+        <h3>Похожие фильмы:</h3>
+        <div className="ms-auto me-auto mt-4">
+          <Carousel controls={false} interval={2000}>
+            {moviesList.map((movie) => (
+              <Carousel.Item key={movie.id}>
+                <Row>
+                  <Col className="mx-auto" style={{ maxWidth: '500px' }}>
+                    <Link to={`/movie/${movie.id}`}>
+                      <img
+                        alt={movie.name}
+                        className="d-block w-100"
+                        src={movie.poster.url}
+                        style={{ objectFit: 'cover', height: '700px' }}
+                      />
+                    </Link>
+                  </Col>
+                </Row>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+      </Col>
+    </Row>
   );
 };
 

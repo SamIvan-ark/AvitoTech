@@ -1,6 +1,7 @@
 import {
   Button,
-  Container,
+  Col,
+  Row,
 } from 'react-bootstrap';
 import { ScrollRestoration, useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -12,38 +13,44 @@ import {
 const MoviePage = () => {
   const filmData = useLoaderData();
   const navigate = useNavigate();
-
   return (
-    <Container className="bg-dark text-light p-4" fluid>
-      <Button onClick={() => navigate(-1)} variant="secondary">Назад</Button>
-      <div className="row mt-1">
-        <div className="d-flex justify-content-end flex-column w-100">
-          <h1 className="w-50">{filmData.name}</h1>
-          <p className="w-50">{filmData.description}</p>
+    <div>
+      <Row className="bg-dark text-light m-4">
+        <Col className="d-flex flex-column align-items-start justify-content-start" md={6} xs={12}>
+          <Button className="mb-3" onClick={() => navigate(-1)} variant="secondary">Назад</Button>
+          <img alt={filmData.name} className="mb-3 ms-auto me-auto" src={filmData.poster.url} style={{ maxWidth: '90%', overflow: 'hidden' }} />
+        </Col>
+        <Col className="d-flex flex-column align-items-start justify-content-start" md={6} xs={12}>
+          <h1>{filmData.name}</h1>
+          <p className="fs-5">{filmData.description}</p>
           <h3>
-            {`Рейтинг IMDB: ${filmData.rating.imdb}`}
+            {filmData.rating.imdb === 0 ? null : `Рейтинг IMDB: ${filmData.rating.imdb}`}
             <br />
-            {`Рейтинг КиноПоиска: ${filmData.rating.kp}`}
+            {filmData.rating.kp === 0 ? null : `Рейтинг КиноПоиска: ${filmData.rating.kp.toFixed(1)}`}
           </h3>
-          <div>
+        </Col>
+      </Row>
+      <Col className="mt-2 me-4 ms-4 text-light col">
+        <div className="d-flex justify-content-end flex-column w-100">
+          <div className="mb-4 mt-4">
             <ActorsList id={filmData.id} />
           </div>
-          <div>
+          <div className="mb-4 mt-4">
             <SeasonsAndSeries id={filmData.id} />
           </div>
-          <div>
+          <div className="mb-4 mt-4">
             <Reviews id={filmData.id} />
           </div>
-          <div>
+          <div className="mb-4 mt-4">
             <Posters id={filmData.id} />
           </div>
-          <div>
+          <div className="mb-4 mt-4">
             <SimilarMovies moviesList={filmData.similarMovies} />
           </div>
         </div>
-      </div>
+      </Col>
       <ScrollRestoration />
-    </Container>
+    </div>
   );
 };
 
