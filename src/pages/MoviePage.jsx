@@ -6,6 +6,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import {
   ActorsList, Posters, Reviews, SeasonsAndSeries,
+  SimilarMovies,
 } from '../components/movieDataComponents';
 
 const MoviePage = () => {
@@ -35,6 +36,9 @@ const MoviePage = () => {
           </div>
           <div>
             <Posters id={filmData.id} />
+          </div>
+          <div>
+            <SimilarMovies moviesList={filmData.similarMovies} />
           </div>
         </div>
       </div>
