@@ -20,7 +20,9 @@ const MoviePage = () => {
           <h1 className="w-50">{filmData.name}</h1>
           <p className="w-50">{filmData.description}</p>
           <h3>
-            {`Рейтинг: ${filmData.rating.imdb}`}
+            {`Рейтинг IMDB: ${filmData.rating.imdb}`}
+            <br />
+            {`Рейтинг КиноПоиска: ${filmData.rating.kp}`}
           </h3>
           <div>
             <ActorsList id={filmData.id} />

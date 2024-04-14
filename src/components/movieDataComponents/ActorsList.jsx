@@ -22,7 +22,7 @@ const ActorsList = ({ id }) => {
   if (isLoading || !actors) {
     return <CenteredSpinner />;
   }
-  if (actors?.docs.length === 0) {
+  if (actors.pages === 0) {
     return (
       <h3>Нет информации о сезонах и сериях</h3>
     );

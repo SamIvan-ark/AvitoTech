@@ -21,7 +21,7 @@ const SeasonsAndSeries = ({ id }) => {
   if (isLoading || !seasons) {
     return <CenteredSpinner />;
   }
-  if (seasons?.docs.length === 0) {
+  if (seasons.pages === 0) {
     return (
       <h3>Нет информации о сезонах и сериях</h3>
     );

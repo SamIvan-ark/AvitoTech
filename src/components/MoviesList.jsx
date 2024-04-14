@@ -8,7 +8,8 @@ const MoviesList = ({ movies }) => (
         <Card data-bs-theme="dark">
           <Card.Img src={movie.poster.previewUrl} variant="top" />
           <Card.Body>
-            <Card.Title>{movie.name}</Card.Title>
+            <Card.Title className="fs-4 text-center">{movie.name}</Card.Title>
+            <p className="fs-6 text-center">{movie.shortDescription}</p>
             <Link to={`movie/${movie.id}`}>На страницу фильма</Link>
           </Card.Body>
         </Card>

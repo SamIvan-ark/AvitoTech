@@ -19,12 +19,11 @@ const Reviews = ({ id }) => {
   if (isLoading || !reviews) {
     return <CenteredSpinner />;
   }
-  if (reviews?.docs.length === 0) {
+  if (reviews.pages === 0) {
     return (
       <h3>Нет информации об отзывах зрителей</h3>
     );
   }
-  console.log(reviews);
   return (
     <>
       <h3>Отзывы зрителей</h3>
