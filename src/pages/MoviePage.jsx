@@ -2,7 +2,7 @@ import {
   Button,
   Container,
 } from 'react-bootstrap';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { ScrollRestoration, useLoaderData, useNavigate } from 'react-router-dom';
 
 import {
   ActorsList, Posters, Reviews, SeasonsAndSeries,
@@ -42,6 +42,7 @@ const MoviePage = () => {
           </div>
         </div>
       </div>
+      <ScrollRestoration />
     </Container>
   );
 };

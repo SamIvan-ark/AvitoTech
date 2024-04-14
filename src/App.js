@@ -14,9 +14,7 @@ const router = createBrowserRouter(
       path="movie/:id"
     />,
     <Route
-      element={(
-        <SearchPage />
-      )}
+      element={<SearchPage />}
       errorElement={<h1 className="text-light">А ой (страницу ошибки забыли)</h1>}
       path="/"
     />,
