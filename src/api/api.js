@@ -40,3 +40,8 @@ export const getStaff = async (params) => {
   });
   return response.data;
 };
+
+export const getReviews = async (params) => {
+  const response = await axios.get([baseUrl, 'v1.4', 'review'].join('/'), { ...defaultParams, params });
+  return response.data;
+};

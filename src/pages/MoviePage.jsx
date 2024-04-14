@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-import { ActorsList, SeasonsAndSeries } from '../components/movieDataComponents';
+import { ActorsList, Reviews, SeasonsAndSeries } from '../components/movieDataComponents';
 
 const MoviePage = () => {
   const filmData = useLoaderData();
@@ -26,6 +26,9 @@ const MoviePage = () => {
           </div>
           <div>
             <SeasonsAndSeries id={filmData.id} />
+          </div>
+          <div>
+            <Reviews id={filmData.id} />
           </div>
           {/* <Carousel className="w-25">
             {filmData.persons.map((actor) => (
