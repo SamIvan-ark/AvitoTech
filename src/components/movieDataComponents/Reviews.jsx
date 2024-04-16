@@ -17,7 +17,7 @@ const Reviews = ({ id }) => {
       movieId: id,
       page,
     });
-  }, [page]);
+  }, [page, id]);
 
   if (isLoading || !reviews) {
     return <CenteredSpinner />;

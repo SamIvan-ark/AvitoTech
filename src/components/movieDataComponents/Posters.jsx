@@ -14,7 +14,7 @@ const Posters = ({ id }) => {
       type: ['wallpaper', 'promo', 'screenshot'],
       limit: 100,
     });
-  }, []);
+  }, [id]);
 
   if (isLoading || !posters) {
     return <CenteredSpinner />;
@@ -29,7 +29,7 @@ const Posters = ({ id }) => {
       <Col className="text-center">
         <h3>Постеры:</h3>
         <div className="ms-auto me-auto mt-4">
-          <Carousel controls={false} interval={2000}>
+          <Carousel interval={2000}>
             {posters.docs.map((poster) => (
               <Carousel.Item key={poster.id}>
                 <Row>

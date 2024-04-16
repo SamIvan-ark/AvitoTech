@@ -16,7 +16,7 @@ const SeasonsAndSeries = ({ id }) => {
       movieId: id,
       page,
     });
-  }, [page]);
+  }, [page, id]);
 
   if (isLoading || !seasons) {
     return <CenteredSpinner />;

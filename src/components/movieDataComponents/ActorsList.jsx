@@ -22,7 +22,7 @@ const ActorsList = ({ id }) => {
       page,
       selectFields: ['countAwards', 'profession', 'id', 'name', 'photo', 'enName'],
     });
-  }, [page]);
+  }, [page, id]);
 
   if (isLoading || !actors) {
     return <CenteredSpinner />;
